@@ -187,6 +187,151 @@ public class MvcMemberFormServlet extends HttpServlet{
 > 위 코드의 단점 forward, ViewPath가 중복된다. 
 > MVC 프레임워크라면 단점이 해결된다.
 
+## 스프링 MVC 구조
+1. HTTP 요청
+2. DispatcherServlet
+3. 핸들러 매핑
+4. 핸들러 어댑터 목록
+5. 핸들러 어댑터
+6. 핸들러(컨트롤러) 호출
+7. 핸들러 어댑터 Model and View 반환
+8. DispatcherServlet ViewResolver 호출
+9. ViewResolver View 반환
+10. DispatcherServlet render호출
+11. View HTML 응답
+
+
+##최종적인 spring mvc형태
+```
+@Controller
+@RequestMapping("/springmvc/v3/members")
+public class SpringMemberControllerV3 {
+  private MemberRepository memberRepository = MemberRepository.getInstance();
+  
+  @GetMapping("/new-form")
+  public String newForm() {
+    return "new-form";
+  }
+ 
+ @PostMapping("/save")
+ public String save( @RequestParam("username") String username, @RequestParam("age") int age, Model model) {
+    Member member = new Member(username, age);
+    memberRepository.save(member);
+    model.addAttribute("member", member);
+    return "save-result"; 
+ }
+ 
+ @GetMapping
+ public String members(Model model) {
+    List<Member> members = memberRepository.findAll();
+    model.addAttribute("members", members);
+    return "members";
+ }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
